@@ -1,0 +1,6 @@
+
+
+a:hover {
+  @apply transition duration-200;
+  @apply text-white
+}
