@@ -53,10 +53,10 @@ const PlayGroundGrapher = () => {
                 theme="dark"
 
             />
-            <div className='w-[100%] gap-2 px-2 flex flex-col  ' >
+            <div className='w-[100%] gap-2 px-2 my-2 ml-5 flex flex-col  ' >
                 <div className='flex  pb-px' >
 
-                    <div className='w-1/5 mr-2' >
+                    <div className='w-1/5 mr-2 text-xl font-bold' >
                         Try your own graphs
                     </div>
 
