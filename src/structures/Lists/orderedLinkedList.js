@@ -11,27 +11,25 @@ class Node {
 
 
 
-class OrderedLinkedList extends LinkedList{
+class OrderedLinkedList extends LinkedList {
     constructor() {
         super()
     }
     insert(value) {
         let newNode = new Node(value)
-        console.log(this.head)
-        console.log(newNode)
         if (this.head === null)
             this.head = newNode;
         else {
-            let current = this.head ;
+            let current = this.head;
             let previous = null;
-            let  stop = false;
+            let stop = false;
             while (current != null && !stop) {
                 if (current.value > value) {
                     stop = true;
-                
-                }else  if (current.value== value) {
+
+                } else if (current.value == value) {
                     return;
-                }else {
+                } else {
                     previous = current;
                     current = current.next;
                 }
@@ -42,7 +40,7 @@ class OrderedLinkedList extends LinkedList{
                 this.head = temp;
             } else {
                 temp.next = current;
-                previous.next= temp;
+                previous.next = temp;
             }
 
         }
@@ -50,5 +48,5 @@ class OrderedLinkedList extends LinkedList{
 }
 
 export {
-    Node,OrderedLinkedList
+    Node, OrderedLinkedList
 }

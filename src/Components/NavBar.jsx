@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from "flowbite-react";
 import { PiGraph } from "react-icons/pi";
-const NavBar = ({setSeletedGrapher}) => {
-  // State to manage the navbar's visibility
-  const [nav, setNav] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
-  // Toggle function to handle the navbar's display
-  const handleNav = () => {
-    setNav(!nav);
-  };
 
-  // Array containing navigation items
+
+const NavBar = ({setSeletedGrapher}) => {
+
   const navItems = [
     { id: 1, text: 'Trees' },
     { id: 2, text: 'LinkedList' },
@@ -33,22 +27,25 @@ const NavBar = ({setSeletedGrapher}) => {
       setSeletedGrapher(index)
       return;
     }
-
+    if(index==4){
+      setSeletedGrapher(index)
+      return;
+    }
   }
 
   return (
     <Navbar fluid rounded className='bg-gray-900'>
     <Navbar.Brand >
-      <PiGraph className="mr-3 h-6 sm:h-9"  />
+      <PiGraph className="mr-3"  />
       <span className="self-center whitespace-nowrap text-xl font-semibold ">Grapher</span>
     </Navbar.Brand>
     <Navbar.Toggle />
     <Navbar.Collapse>
-    <Navbar.Link href="#" active className="hover:text-white ">
+    <Navbar.Link href="#" active className="hover:text-white text-xl ">
         Home
       </Navbar.Link>
       {navItems.map((item)=>{
-        return  <Navbar.Link key={item.id} href="#"  className="text-white hover:text-white" onClick={()=>{ selectGrapher(item.id)}}>
+        return  <Navbar.Link key={item.id} href="#"  className="text-white hover:text-white text-xl" onClick={()=>{ selectGrapher(item.id)}}>
         {item.text}
         </Navbar.Link>
        

@@ -8,7 +8,7 @@ class Graph {
         this.dot = "";
     }
 
-    clear(){
+    clear() {
         this.AdjList = new Map();
         this.dot = "";
     }
@@ -18,7 +18,7 @@ class Graph {
     addVertex(v) {
         // initialize the adjacent list with a
         // null array
-        if(this.AdjList.has(v)){
+        if (this.AdjList.has(v)) {
             return;
         }
         this.AdjList.set(v, []);
@@ -28,9 +28,9 @@ class Graph {
         // get the list for vertex v and put the
         // vertex w denoting edge between v and w
 
-        if(!this.AdjList.has(v)){
+        if (!this.AdjList.has(v)) {
             this.AdjList.set(v, []);
-            if(this.AdjList.get(w)){
+            if (this.AdjList.get(w)) {
                 this.AdjList.get(v).push(w);
                 return;
             }
@@ -38,7 +38,7 @@ class Graph {
             this.AdjList.get(v).push(w);
             return;
         }
-        if(this.AdjList.get(w)){
+        if (this.AdjList.get(w)) {
             this.AdjList.get(v).push(w);
             return;
         }
@@ -52,10 +52,9 @@ class Graph {
     }
 
 
-    dotGraph(){
-        this.dot=""
+    dotGraph() {
+        this.dot = ""
         this.printGraph()
-        console.log("dot",this.dot)
     }
 
     // Prints the vertex and adjacency list
@@ -69,17 +68,17 @@ class Graph {
             // for the vertex
             var get_values = this.AdjList.get(i);
             var conc = "";
-            this.dot = this.dot+ "\n\tnode"+i+ "[ label = \""+i+"\"]";
+            this.dot = this.dot + "\n\tnode" + i + "[ label = \"" + i + "\"]";
             // iterate over the adjacency list
             // concatenate the values into a string
-            for (var j of get_values){
+            for (var j of get_values) {
                 conc += j + " ";
-                this.dot = this.dot +"\n\tnode"+i+"->node"+j+";"; 
+                this.dot = this.dot + "\n\tnode" + i + "->node" + j + ";";
             }
-                
+
 
             // print the vertex and its adjacency list
-            console.log(i + " -> " + conc);
+            //console.log(i + " -> " + conc);
         }
     }
 
@@ -100,9 +99,6 @@ class Graph {
         while (!q.isEmpty()) {
             // get the element from the queue
             var getQueueElement = q.dequeue();
-
-            // passing the current vertex to callback function
-            console.log(getQueueElement);
 
             // get the adjacent list for current vertex
             var get_List = this.AdjList.get(getQueueElement);
@@ -131,7 +127,7 @@ class Graph {
             DFSUtil(vert, visited)
             {
                 visited[vert] = true;
-                console.log(vert);
+                //console.log(vert);
 
                 var get_neighbours = this.AdjList.get(vert);
 
@@ -146,4 +142,4 @@ class Graph {
     }
 }
 
-export{Graph}
+export { Graph }

@@ -12,9 +12,9 @@ class AVLTree {
         this.root = null;
         this.dot = "";
     }
-    clear(){
+    clear() {
         this.root = null;
-        this.dot ='';
+        this.dot = '';
     }
     // Utility function to get the height of a node.
     getHeight(node) {
@@ -102,27 +102,26 @@ class AVLTree {
     insert(data) {
         this.root = this.insertNode(this.root, data);
     }
-    dotGraph(){
-        this.dot=""
+    dotGraph() {
+        this.dot = ""
         this.preorder(this.root)
-        console.log("dot",this.dot)
+
     }
     preorder(node) {
         if (node !== null) {
-            console.log("d",node.data);
-            this.dot = this.dot+ "node"+node.data+ "[ label = \"<C0>|<f1>"+node.data+"|<C1>\"]\n\t";
-            if(node.left!=null){
-                this.dot = this.dot +"node"+node.data+":C0->node"+node.left.data+":f1;\n\t"; 
+            this.dot = this.dot + "node" + node.data + "[ label = \"<C0>|<f1>" + node.data + "|<C1>\"]\n\t";
+            if (node.left != null) {
+                this.dot = this.dot + "node" + node.data + ":C0->node" + node.left.data + ":f1;\n\t";
             }
             this.preorder(node.left);
-            if(node.right!=null){
-                this.dot = this.dot+"node"+node.data+":C1->node"+node.right.data+":f1;\n\t"; 
+            if (node.right != null) {
+                this.dot = this.dot + "node" + node.data + ":C1->node" + node.right.data + ":f1;\n\t";
             }
             this.preorder(node.right);
         }
     }
 }
 
-export{
+export {
     AVLTree
 }
