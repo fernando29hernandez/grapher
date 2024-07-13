@@ -24,11 +24,11 @@ Grapher is an app for studying and comprenhension about data structures like lin
 
 ## Screenshots
 
-<img src="https://github.com/fernando29hernandez/short-url/blob/main/src/assets/screenshot1.PNG" width="80%">
+<img src="https://github.com/fernando29hernandez/grapher/blob/main/src/assets/screenshot1.PNG" width="80%">
 
-<img src="https://github.com/fernando29hernandez/short-url/blob/main/src/assets/screenshot2.PNG" width="80%">
+<img src="https://github.com/fernando29hernandez/grapher/blob/main/src/assets/screenshot2.PNG" width="80%">
 
-<img src="https://github.com/fernando29hernandez/short-url/blob/main/src/assets/screenshot3.PNG" width="80%">
+<img src="https://github.com/fernando29hernandez/grapher/blob/main/src/assets/screenshot3.PNG" width="80%">
 
 
 ## Technologies
