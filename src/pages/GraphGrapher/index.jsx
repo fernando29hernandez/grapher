@@ -81,7 +81,7 @@ const GraphGrapher = () => {
         setDotGraph(val);
     }, []);
     return (
-        <div class="flex pt-3 h-[90%]">
+        <div className="flex pt-3 h-[80%] bg-blue-900 min-h-0">
             <ToastContainer position="bottom-right"
                 autoClose={2000}
                 hideProgressBar={false}
@@ -94,7 +94,8 @@ const GraphGrapher = () => {
                 theme="dark"
 
             />
-            <Sidebar aria-label="Default sidebar example" theme={SideBarCustomTheme} className='w-1/5'>
+            {/* Sidebar hidden on small screens */}
+            <Sidebar aria-label="Default sidebar example" theme={SideBarCustomTheme} className='hidden sm:block w-1/5'>
                 <Sidebar.Items >
                     <Sidebar.ItemGroup className="bg-gray-900 text-white">
                         <Sidebar.Item href="#" icon={PiGraphBold} className="text-white hover:bg-gray-700" onClick={() => { selectTree(0) }}>
@@ -106,64 +107,55 @@ const GraphGrapher = () => {
                     </Sidebar.ItemGroup>
                 </Sidebar.Items>
             </Sidebar>
-            <div className='w-4/5 gap-2 px-2 flex flex-col ' >
-                <div className='flex  pb-px' >
 
-                    <div className='w-1/5 mr-2' >
-                        Enter a vertex name
-                    </div>
+            <div className='flex-1 min-h-0 w-full sm:w-4/5 gap-2 px-2 flex flex-col' >
 
-                </div>
-                <div className='flex  pb-px py-0 '  >
+                <div className='flex flex-col sm:flex-row pb-px py-0 gap-2'>
 
-                    <TextInput sizing="md" onChange={e => setVertex(e.target.value)} value={vertex} className='w-1/5 mr-2 ' placeholder='Enter a vertex name'  />
+                    <TextInput sizing="md" onChange={e => setVertex(e.target.value)} value={vertex} className='w-full sm:w-1/5 mr-0 sm:mr-2 ' placeholder='Enter a vertex name'  />
 
-                    <Button size="md" onClick={insertVertex} className='w-[10%] mr-2 focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300 ' gradientDuoTone="cyanToBlue" >
-                        Add Vertex
-                    </Button>
-                    <Button size="md" onClick={clear} className='w-[10%] bg-white hover:text-black focus:ring-1 focus:ring-cyan-300 ' outline gradientDuoTone="white" >
-                        Clear
-                    </Button>
-                </div>
-                <div className='flex  pb-px' >
-                    <div className='w-1/2 mr-2' >
-                        Enter a Source 
-                    </div>
-                    <div className='w-1/2 mr-2' >
-                        Enter a Destination
-                    </div>
-                    <div className='w-[10%] mr-2' >
-                        
+                    <div className='flex gap-2 w-full sm:w-auto'>
+                        <Button size="md" onClick={insertVertex} className='flex-1 sm:flex-none focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300 ' gradientDuoTone="cyanToBlue" >
+                            Add Vertex
+                        </Button>
+                        <Button size="md" onClick={clear} className='flex-1 sm:flex-none bg-white hover:text-black focus:ring-1 focus:ring-cyan-300 ' outline gradientDuoTone="white" >
+                            Clear
+                        </Button>
                     </div>
                 </div>
-                <div className='flex  pb-px' >
 
-                    <TextInput onChange={e => setEdgeA(e.target.value)} value={edgeA} className='w-1/2 mr-2' placeholder='Enter a name' sizing="md" type="text" />
-
-
-                    <TextInput onChange={e => setEdgeB(e.target.value)} value={edgeB} className='w-1/2 mr-2' placeholder='Enter a name' sizing="md" type="text" />
-
-
-                    <Button size="md" onClick={insertEdge} className='w-[10%] mr-2 focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300' gradientDuoTone="cyanToBlue" >
-                        Add Egde
-                    </Button>
-
+                <div className='flex flex-col sm:flex-row gap-2'>
+                    <div className='w-full sm:w-1/3 text-white'>Enter a Source</div>
+                    <div className='w-full sm:w-1/3 text-white'>Enter a Destination</div>
                 </div>
-                <div className='flex flex-row gap-2'>
+
+                <div className='flex flex-col sm:flex-row gap-2'>
+                    <TextInput onChange={e => setEdgeA(e.target.value)} value={edgeA} className='w-full sm:w-1/3 mr-0 sm:mr-2' placeholder='Enter a name' sizing="md" type="text" />
+
+                    <TextInput onChange={e => setEdgeB(e.target.value)} value={edgeB} className='w-full sm:w-1/3 mr-0 sm:mr-2' placeholder='Enter a name' sizing="md" type="text" />
+
+                    <div className='flex w-full sm:w-auto'>
+                        <Button size="md" onClick={insertEdge} className='flex-1 sm:flex-none focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300' gradientDuoTone="cyanToBlue" >
+                            Add Edge
+                        </Button>
+                    </div>
+                </div>
+
+                <div className='flex-1 min-h-0 flex flex-col sm:flex-row gap-2 h-full'>
                     <ErrorBoundary fallback={<div className='w-full h-[600px] bg-white rounded-[12px] text-black align-middle content-center'>Something went wrong</div>} onReset={(details) => {
-
                     }} resetKeys={[dotGraph]}>
-                        <div className='w-[50%] w-min-[50%]  h-[600] h-min-[50%] bg-white rounded-[12px] '>
+                        <div className='flex-1 min-h-0 w-full sm:w-1/2 bg-white rounded-[12px] p-2 overflow-auto h-full'>
                             <Graphviz dot={dotGraph}
+                                style={{ height: '100%', width: '100%' }}
 
                                 options={{
                                     //fit: true,
                                     tweenPaths: true,
                                     tweenShapes: true,
                                     growEnteringEdges: true,
-                                    height: 600,
+                                    height: '100%',
                                     //maxWidth: "95%",
-                                    width: "95%",
+                                    width: "100%",
                                     //zoom: true,
                                     engine: "dot",
                                 }}
@@ -172,11 +164,12 @@ const GraphGrapher = () => {
                         </div>
 
                     </ErrorBoundary>
-                    <CodeMirror value={dotGraph} className='w-[50%]' height="100%" onChange={onChange} theme={vscodeDark} />
+                    <div className='flex-1 min-h-0 w-full sm:w-1/2 bg_gray-800 rounded-[12px] overflow-auto max-h-screen h-full'>
+                        <CodeMirror value={dotGraph} className='w-full h-full' height="100%" onChange={onChange} theme={vscodeDark} />
+                    </div>
                 </div>
 
             </div>
-
         </div>
     );
 }

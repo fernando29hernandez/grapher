@@ -74,7 +74,7 @@ const ListGrapher = () => {
         setDotGraph(val);
     }, []);
     return (
-        <div class="flex pt-3 h-[90%]">
+        <div className="flex pt-3 h-[100%] bg-blue-900 min-h-0">
             <ToastContainer position="bottom-right"
                 autoClose={2000}
                 hideProgressBar={false}
@@ -87,7 +87,8 @@ const ListGrapher = () => {
                 theme="dark"
 
             />
-            <Sidebar aria-label="Default sidebar example" theme={SideBarCustomTheme} className='w-1/5'>
+            {/* Sidebar: hidden on small screens */}
+            <Sidebar aria-label="Default sidebar example" theme={SideBarCustomTheme} className='hidden sm:block w-1/5'>
                 <Sidebar.Items >
                     <Sidebar.ItemGroup className="bg-gray-900 text-white">
                         <Sidebar.Item href="#" icon={FaList} className="text-white hover:bg-gray-700" onClick={() => { selectTree(0) }}>
@@ -102,32 +103,46 @@ const ListGrapher = () => {
                     </Sidebar.ItemGroup>
                 </Sidebar.Items>
             </Sidebar>
-            <div className='w-4/5 gap-2 px-2 flex flex-col ' >
-                <div className='flex  pb-2' >
+            {/* Main content: full width on small screens */}
+            <div className='w-full sm:w-4/5 gap-2 px-2 flex flex-col ' >
+                {/* Mobile controls: select list type and inputs stack nicely */}
+                <div className='flex flex-col sm:flex-row sm:items-center pb-2 gap-2'>
+                    <div className='flex items-center justify-between sm:justify-start gap-2 w-full sm:w-auto'>
+                        <label className='text-white hidden sm:block mr-2'>Type:</label>
+                        <select onChange={e => selectTree(parseInt(e.target.value))} className='bg-gray-800 text-white rounded px-2 py-1 w-full sm:w-auto'>
+                            <option value={0}>Linked List</option>
+                            <option value={1}>Ordered Linked List</option>
+                            <option value={2}>Circular Linked List</option>
+                        </select>
+                    </div>
 
-                    <TextInput onChange={e => setData(e.target.value)} value={data} className='w-2/6 mr-2' placeholder='Enter a number' sizing="md" type="number" />
+                    <TextInput onChange={e => setData(e.target.value)} value={data} className='w-full sm:w-2/6 mr-0 sm:mr-2' placeholder='Enter a number' sizing="md" type="number" />
 
-                    <Button size="md" onClick={insert} className='w-[10%] mr-2 focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300' gradientDuoTone="cyanToBlue" >
-                        Add
-                    </Button>
-                    <Button size="md" onClick={clear} className='w-[10%] bg-white hover:text-black focus:ring-1 focus:ring-cyan-300' outline gradientDuoTone="white" >
-                        Clear
-                    </Button>
+                    <div className='flex gap-2 w-full sm:w-auto'>
+                        <Button size="md" onClick={insert} className='flex-1 sm:flex-none focus:bg-cyan-800 focus:ring-1 focus:ring-cyan-300' gradientDuoTone="cyanToBlue" >
+                            Add
+                        </Button>
+                        <Button size="md" onClick={clear} className='flex-1 sm:flex-none bg-white hover:text-black focus:ring-1 focus:ring-cyan-300' outline gradientDuoTone="white" >
+                            Clear
+                        </Button>
+                    </div>
                 </div>
-                <div className='flex flex-row gap-2'>
+
+                <div className='flex-1 min-h-0 flex flex-col sm:flex-row gap-2 h-full'>
                     <ErrorBoundary fallback={<div className='w-full h-[600px] bg-white rounded-[12px] text-black align-middle content-center'>Something went wrong</div>} onReset={(details) => {
                     }} resetKeys={[dotGraph]}>
-                        <div className='w-[50%] w-min-[50%]  h-[600] h-min-[50%] bg-white rounded-[12px] '>
+                        <div className='w-full sm:w-1/2 bg-white rounded-[12px] p-2 overflow-auto h-full'>
                             <Graphviz dot={dotGraph}
+                                style={{ height: '100%', width: '100%' }}
 
                                 options={{
                                     //fit: true,
                                     tweenPaths: true,
                                     tweenShapes: true,
                                     growEnteringEdges: true,
-                                    height: 600,
+                                    height: '100%',
                                     //maxWidth: "95%",
-                                    width: "95%",
+                                    width: "100%",
                                     //zoom: true,
                                     engine: "dot",
                                 }}
@@ -136,7 +151,10 @@ const ListGrapher = () => {
                         </div>
 
                     </ErrorBoundary>
-                    <CodeMirror value={dotGraph} className='w-[50%]' height="100%" onChange={onChange} theme={vscodeDark} />
+
+                    <div className='w-full sm:w-1/2 bg-gray-800 rounded-[12px] overflow-auto max-h-screen h-full'>
+                        <CodeMirror value={dotGraph} className='w-full h-full' height="100%" onChange={onChange} theme={vscodeDark} />
+                    </div>
                 </div>
 
             </div>
